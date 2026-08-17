@@ -10,7 +10,7 @@
 
 body { margin: 0; min-width: 320px; }
 
-button, a { font: inherit; }
+button, input, a { font: inherit; }
 
 a { text-decoration: none; }
 
@@ -87,22 +87,73 @@ h2 {
 }
 
 .selection-card {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 12px;
   cursor: pointer;
   text-align: left;
+  user-select: none;
+  transition: border-color 120ms ease, background-color 120ms ease, box-shadow 120ms ease;
 }
 
-.selection-card:hover { border-color: #a9b4c9; }
+.selection-card:hover {
+  border-color: #a9b4c9;
+  background: #ffffff;
+}
 
-.checkbox {
-  font-size: 1.25rem;
+.selection-card:focus-within {
+  outline: 3px solid rgba(23, 32, 51, 0.16);
+  outline-offset: 2px;
+}
+
+.selection-card.selected {
+  border-color: #172033;
+  background: #f0f3f8;
+  box-shadow: inset 0 0 0 1px #172033;
+}
+
+.selection-card input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.checkbox-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 22px;
+  width: 22px;
+  height: 22px;
+  border: 2px solid #8b96aa;
+  border-radius: 5px;
+  background: #ffffff;
+  color: #ffffff;
+  font-size: 0.85rem;
+  line-height: 1;
+}
+
+.selection-card.selected .checkbox-mark {
+  border-color: #172033;
+  background: #172033;
+}
+
+.selection-summary {
+  margin-top: 22px;
   color: #5e6b85;
 }
 
-.hero-actions { margin-top: 34px; }
+.selection-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 28px;
+}
 
+.secondary-button,
 .primary-button {
   display: inline-flex;
   align-items: center;
@@ -110,12 +161,48 @@ h2 {
   min-height: 48px;
   padding: 0 22px;
   border-radius: 12px;
-  background: #172033;
-  color: white;
   font-weight: 800;
+  cursor: pointer;
+}
+
+.secondary-button {
+  border: 1px solid #d4dbe7;
+  background: #ffffff;
+  color: #172033;
+}
+
+.secondary-button:hover:not(:disabled) { background: #f5f7fb; }
+
+.primary-button {
+  border: 1px solid #172033;
+  background: #172033;
+  color: #ffffff;
+}
+
+.primary-button:hover:not(:disabled) { background: #26324a; }
+
+.primary-button:disabled,
+.secondary-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.start-button {
+  border: 1px solid #172033;
+}
+
+.hero-actions { margin-top: 34px; }
+
+.foundation-note {
+  margin: 18px 0 0;
+  color: #7a859a;
+  font-size: 0.9rem;
+  line-height: 1.6;
 }
 
 @media (max-width: 760px) {
   .hero-card, .panel { padding: 28px; }
   .topic-grid, .selection-grid { grid-template-columns: 1fr; }
+  .selection-actions { flex-direction: column-reverse; }
+  .selection-actions button { width: 100%; }
 }
