@@ -46,4 +46,4 @@ jobs:
           cache: maven
 
       - name: Run tests
-        run: ./mvnw test -Dspring.datasource.url=jdbc:postgresql://localhost:5432/berrybot -Dspring.datasource.username=berrybot -Dspring.datasource.password=change-me
+        run: mvn --batch-mode test -Dspring.datasource.url=jdbc:postgresql://localhost:5432/berrybot -Dspring.datasource.username=berrybot -Dspring.datasource.password=change-me
