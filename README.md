@@ -11,15 +11,10 @@ React + Vite frontend
 Spring Boot 3.5 / Java 17 backend
         |
         +--> Interview Question API
-        |
         +--> PostgreSQL
-        |
         +--> Flyway migrations
-        |
         +--> Spring Security boundary
-        |
         +--> Future AI abstraction / Ollama
-        |
         +--> Future isolated code runner
 ```
 
@@ -40,8 +35,6 @@ Spring Boot 3.5 / Java 17 backend
 - GitHub Actions backend CI with PostgreSQL
 
 ## Local development
-
-Start PostgreSQL and the backend/frontend stack:
 
 ```bash
 docker compose up --build
