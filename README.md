@@ -16,7 +16,7 @@ Spring Boot 3.5 / Java 17 backend
         |
         +--> Flyway migrations
         |
-        +--> Security boundary
+        +--> Spring Security boundary
         |
         +--> Future AI abstraction / Ollama
         |
