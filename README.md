@@ -1,146 +1,60 @@
-# 🍓 BerryBot — Professional Mock Interview Platform
+# BerryBot
 
-BerryBot is a free, professional mock-interview platform for software developers preparing for real technical interviews.
+BerryBot is a professional mock-interview platform for software engineers.
 
-## Product Goal
-
-BerryBot is designed to simulate a real software-company technical interview rather than behave like a generic chatbot.
-
-The platform will support focused interviews across:
-
-- Java
-- OOPS Concepts
-- Spring Boot
-- Microservices
-- Programming Round
-- React
-
-Candidates select the topics they want to practice before starting an interview.
-
-## Architecture
-
-Version 1 is a **modular monolith** with clear module boundaries so individual capabilities can later evolve into services without premature distributed-system complexity.
-
-### Backend
-
-- Java 17
-- Spring Boot 3.x
-- Spring Web
-- Spring Data JPA / Hibernate
-- Spring Security / JWT
-- Bean Validation
-- PostgreSQL
-- Maven
-- JUnit 5 / Mockito
-- Testcontainers
-- Spring Boot Actuator
-- OpenAPI / Swagger
-
-### Frontend
-
-- React
-- TypeScript
-- Vite
-- React Router
-- Axios
-- Modern CSS
-
-### Infrastructure
-
-- Docker
-- Docker Compose
-- Git / GitHub
-- Optional Ollama local LLM
-
-## AI Architecture
-
-BerryBot will not depend on paid AI APIs.
-
-The application will expose an `InterviewAIService` abstraction with:
-
-1. `RuleBasedInterviewAIService` — always available.
-2. `LocalLLMInterviewAIService` — optional Ollama integration.
-
-If the local LLM is unavailable, BerryBot falls back automatically to rule-based behavior.
-
-## Interview Intelligence
-
-The interview engine will support:
-
-- Progressive questioning
-- Follow-up and challenge questions
-- Adaptive difficulty
-- Topic mastery
-- Project-based questioning
-- Production scenarios
-- Interview history
-- Question rotation and cooldown
-- Concept-level duplicate avoidance
-- Detailed final report
-- Complete question-by-question answers and explanations
-
-BerryBot should feel like a real interview with a senior engineer, not a chat session.
-
-## Development Roadmap
-
-### Phase 1 — Core Product
-
-- Project foundation
-- PostgreSQL
-- Authentication / JWT
-- User profile
-- Interview topics
-- Question bank
-- Interview sessions
-- Interview state machine
-- Rule-based evaluation
-- Final report
-- Interview history
-- React foundation
-
-### Phase 2 — Interview Intelligence
-
-- Adaptive difficulty
-- Follow-ups
-- Weak-topic targeting
-- Project interviews
-- Behavioral interviews
-- Question rotation and spaced repetition
-
-### Phase 3 — Local AI
-
-- Ollama
-- Local LLM question generation
-- Local LLM answer evaluation
-- Dynamic follow-up generation
-
-### Phase 4 — Programming Round
-
-- Java-first coding editor
-- Secure sandbox execution
-- Test cases
-- Complexity evaluation
-
-### Phase 5 — Production Engineering
-
-- Docker hardening
-- CI/CD
-- AWS deployment
-- Observability
-- Scaling
-
-## Repository Structure
+## Current architecture
 
 ```text
-BerryBot/
-├── backend/
-├── frontend/
-├── docker-compose.yml
-├── .env.example
-├── .gitignore
-└── README.md
+React + Vite frontend
+        |
+        v
+Spring Boot 3.5 / Java 17 backend
+        |
+        +--> Interview Question API
+        |
+        +--> PostgreSQL
+        |
+        +--> Flyway migrations
+        |
+        +--> Security boundary
+        |
+        +--> Future AI abstraction / Ollama
+        |
+        +--> Future isolated code runner
 ```
 
-## Status
+## Current capabilities
 
-🚧 Phase 1 foundation in progress.
+- Topic-driven mock interviews
+- Text and browser voice interview modes
+- Speech recognition and speech synthesis
+- Adaptive follow-up foundation
+- Per-question scoring and feedback
+- Interview history
+- Monaco-based Coding Lab
+- PostgreSQL-backed interview question bank
+- Flyway schema migrations
+- Spring Security boundary
+- Swagger/OpenAPI
+- Actuator health and metrics
+- GitHub Actions backend CI with PostgreSQL
+
+## Local development
+
+Start PostgreSQL and the backend/frontend stack:
+
+```bash
+docker compose up --build
+```
+
+Backend: `http://localhost:8080`
+Frontend: `http://localhost:5173`
+Swagger UI: `http://localhost:8080/swagger-ui.html`
+
+Question API example:
+
+```text
+GET /api/v1/questions?topic=Java&difficulty=MEDIUM&limit=5
+```
+
+The browser experience currently keeps a local question fallback so the frontend remains usable while the backend evolves. The next integration step is to make persistent interview sessions and evaluation APIs the source of truth.
