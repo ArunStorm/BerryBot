@@ -11,5 +11,7 @@ import java.util.UUID;
 public interface InterviewQuestionRepository extends JpaRepository<InterviewQuestion, UUID> {
     List<InterviewQuestion> findByTopicIgnoreCaseAndDifficulty(String topic, Difficulty difficulty);
     List<InterviewQuestion> findByTopicIgnoreCase(String topic);
+    List<InterviewQuestion> findByTopicInAndDifficulty(List<String> topics, Difficulty difficulty);
+    List<InterviewQuestion> findByTopicIn(List<String> topics);
     List<InterviewQuestion> findByTypeAndDifficulty(QuestionType type, Difficulty difficulty);
 }
