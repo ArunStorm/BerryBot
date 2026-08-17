@@ -18,6 +18,7 @@ public class InterviewQuestionService {
     }
 
     public List<QuestionResponse> findQuestions(String topic, Difficulty difficulty, int limit) {
+        int safeLimit = Math.max(1, Math.min(limit, 50));
         List<InterviewQuestion> questions = topic == null || topic.isBlank()
                 ? repository.findAll()
                 : difficulty == null
@@ -25,7 +26,7 @@ public class InterviewQuestionService {
                     : repository.findByTopicIgnoreCaseAndDifficulty(topic, difficulty);
 
         return questions.stream()
-                .limit(Math.max(1, Math.min(limit, 50)))
+                .limit(safeLimit)
                 .map(QuestionResponse::from)
                 .toList();
     }
