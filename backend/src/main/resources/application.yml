@@ -2,7 +2,7 @@ spring:
   application:
     name: berrybot-backend
   datasource:
-    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:berrybot}
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:berrybot}?prepareThreshold=0
     username: ${DB_USERNAME:berrybot}
     password: ${DB_PASSWORD:change-me}
   jpa:
@@ -19,7 +19,6 @@ spring:
     locations: classpath:db/migration
     validate-on-migrate: true
     baseline-on-migrate: true
-    baseline-version: 0
 
 server:
   port: ${PORT:${SERVER_PORT:8080}}
